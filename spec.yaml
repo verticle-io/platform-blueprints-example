@@ -1,0 +1,65 @@
+apiVersion: core.platformspec.io/v1alpha1
+kind: BlueprintSpec
+metadata:
+  name: example
+spec:
+
+  authors:
+    - name: Jens Saade
+      email: jens@verticle.io
+
+  description: -|
+    this blueprint for Azure sets up a cluster, vnet and access groups for the cluster, as well as ArgoCD for deployments
+
+  builders:
+    - name: my-azure-provider
+      builder:
+        kind: Provider
+        name: azure
+        configPath: handlers/terraform
+        spec:
+          implementation: io.verticle.oss.platformapi.provider.iaas.impl.AzureProvider
+          spi: io.verticle.oss.platformapi.kinds.provider.spi.IaasProvider
+
+    - name: my-hashivault-provider
+      builder:
+        spec:
+          implementation: io.verticle.oss.platformapi.provider.iaas.impl.HashicorpVaultProvider
+          spi: io.verticle.oss.platformapi.kinds.provider.spi.SecretsProvider
+
+    - name: my-platformscript-provider
+      builder:
+        spec:
+          implementation: io.verticle.oss.platformscript.provider.PlatformScriptProvider
+          spi: io.verticle.oss.platformapi.kinds.provider.spi.CustomProvider
+
+  claims:
+    providers:                                                  # maps to platform yaml
+      - name: azure-entraid
+        category: iaas
+        engine: azure
+
+        description: create necessary groups in Azure EntraID via terraform
+        builderRef: my-azure-provider                           # the implementation to fulfil the bound spec reference
+        configPath: provider/iaas/azure-entraid-groups          # the path within the local repository, these files will be handed to the provider
+        buildSpec: {}                                           # the configuration for the provider
+
+      - name: hashivault
+        category: secrets
+        engine: vault
+
+        description: create a hashicorp vault instance
+        builderRef: my-hashivault-provider
+        configPath: provider/secrets/hashivault
+        buildSpec:
+          helmRepo: https://helm.releases.hashicorp.com
+          chart: hashicorp/vault
+
+      - name: argocd
+        category: cicd
+        engine: argocd
+
+        description: creates an argocd instance with SSO to Azure EntraID
+        builderRef: my-platformscript-provider
+
+
