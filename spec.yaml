@@ -62,6 +62,7 @@ spec:
         description: creates an argocd instance with SSO to Azure EntraID
         builderRef: my-platformscript-provider
         buildSpec:
-          entrypoint: template.kts
+          template: template.kts
+          entrypoint: "bootstrapProjectWorkflow()"
 
 
