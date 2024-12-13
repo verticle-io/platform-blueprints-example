@@ -1,4 +1,4 @@
-apiVersion: core.platformspec.io/v1alpha1
+apiVersion: sdk.platformspec.io/v1alpha1
 kind: BlueprintSpec
 metadata:
   name: example
@@ -33,6 +33,12 @@ spec:
           implementation: io.verticle.oss.platformscript.provider.PlatformScriptProvider
           spi: io.verticle.oss.platformapi.kinds.provider.spi.CustomProvider
 
+    - name: my-containerized-provider
+      builder:
+        spec:
+          implementation: io.verticle.oss.platformapi.provider.custom.impl.ContainerizedProvider
+          spi: io.verticle.oss.platformapi.kinds.provider.spi.CustomProvider
+
   claims:
     providers:                                                  # maps to platform yaml
       - name: azure-entraid
@@ -49,7 +55,7 @@ spec:
         engine: vault
 
         description: create a hashicorp vault instance
-        builderRef: my-hashivault-provider
+        builderRef: my-containerized-provider
         configPath: provider/secrets/hashivault
         buildSpec:
           helmRepo: https://helm.releases.hashicorp.com
