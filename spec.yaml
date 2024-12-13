@@ -18,13 +18,13 @@ spec:
         name: azure
         configPath: handlers/terraform
         spec:
-          implementation: io.verticle.oss.platformapi.provider.iaas.impl.AzureProvider
+          implementation: io.verticle.oss.platformsdk.provider.iaas.impl.AzureProvider
           spi: io.verticle.oss.platformapi.kinds.provider.spi.IaasProvider
 
     - name: my-hashivault-provider
       builder:
         spec:
-          implementation: io.verticle.oss.platformapi.provider.iaas.impl.HashicorpVaultProvider
+          implementation: io.verticle.oss.platformsdk.provider.iaas.impl.HashicorpVaultProvider
           spi: io.verticle.oss.platformapi.kinds.provider.spi.SecretsProvider
 
     - name: my-platformscript-provider
@@ -36,7 +36,7 @@ spec:
     - name: my-containerized-provider
       builder:
         spec:
-          implementation: io.verticle.oss.platformapi.provider.custom.impl.ContainerizedProvider
+          implementation: io.verticle.oss.platformsdk.provider.custom.impl.ContainerizedProvider
           spi: io.verticle.oss.platformapi.kinds.provider.spi.CustomProvider
 
   claims:
