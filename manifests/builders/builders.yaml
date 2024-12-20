@@ -1,0 +1,35 @@
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: Builder
+metadata:
+  name: azure
+spec:
+  implementation: io.verticle.oss.platformsdk.provider.iaas.impl.AzureProvider
+  spi: io.verticle.oss.platformapi.kinds.provider.spi.IaasProvider
+  configPath: handlers/terraform
+
+---
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: Builder
+metadata:
+  name: hashivault
+spec:
+  implementation: io.verticle.oss.platformsdk.provider.iaas.impl.HashicorpVaultProvider
+  spi: io.verticle.oss.platformapi.kinds.provider.spi.SecretsProvider
+
+---
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: Builder
+metadata:
+  name: platformscript
+spec:
+  implementation: io.verticle.oss.platformscript.provider.PlatformScriptProvider
+  spi: io.verticle.oss.platformapi.kinds.provider.spi.CustomProvider
+
+---
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: Builder
+metadata:
+  name: containerized
+spec:
+    implementation: io.verticle.oss.platformsdk.provider.custom.impl.ContainerizedProvider
+    spi: io.verticle.oss.platformapi.kinds.provider.spi.CustomProvider
