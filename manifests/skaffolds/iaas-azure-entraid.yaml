@@ -1,0 +1,16 @@
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: Skaffold
+metadata:
+  name: azure-entraid
+  labels:
+    category: iaas
+    engine: azure
+    sso: entraid
+
+spec:
+  description: create necessary groups in Azure EntraID
+  builderRef:
+    kind: Builder
+    apiVersion: sdk.platformspec.io/v1alpha1
+    name: azure
+  buildSpec: {}

@@ -1,0 +1,7 @@
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: Builder
+metadata:
+  name: containerized
+spec:
+    implementation: io.verticle.oss.platformsdk.provider.custom.impl.ContainerizedProvider
+    spi: io.verticle.oss.platformapi.kinds.provider.spi.CustomProvider

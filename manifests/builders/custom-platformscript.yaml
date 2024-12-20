@@ -1,0 +1,7 @@
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: Builder
+metadata:
+  name: platformscript
+spec:
+  implementation: io.verticle.oss.platformscript.provider.PlatformScriptProvider
+  spi: io.verticle.oss.platformapi.kinds.provider.spi.CustomProvider

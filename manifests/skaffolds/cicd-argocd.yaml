@@ -1,0 +1,16 @@
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: Skaffold
+metadata:
+  name: argocd
+  labels:
+    category: cicd
+    engine: argocd
+spec:
+  description: creates an argocd instance with SSO to Azure EntraID
+  builderRef:
+    kind: Builder
+    apiVersion: sdk.platformspec.io/v1alpha1
+    name: platformscript
+  buildSpec:
+    template: template.kts
+    entrypoint: "bootstrapProjectWorkflow()"
