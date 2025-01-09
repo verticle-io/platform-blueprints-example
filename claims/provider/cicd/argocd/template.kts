@@ -3,6 +3,8 @@ import io.platformspec.crd.provider.spec.Categories
 import io.verticle.oss.platformapi.kinds.provider.api.cicd.Environment
 import io.verticle.oss.platformapi.kinds.provider.spi.*
 import io.verticle.oss.platformscript.api.*
+import io.platformspec.crd.provider.Spec
+import io.verticle.oss.platformapi.kinds.provider.api.Context
 
 val prj = "acme"
 
@@ -33,7 +35,8 @@ fun bootstrapProjectWorkflow(){
     }
 
     // create a new default project
-    cicd?.createEnvironment(null, Environment.builder()
+    cicd?.createEnvironment(providerSpec.get() as Spec , providerContext.get() as Context, 
+        Environment.builder()
         .name(prj)
         .description("the ACME project")
         .namespace("default")
