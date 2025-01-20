@@ -1,0 +1,17 @@
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: Skaffold
+metadata:
+  name: backstage-templates
+  labels:
+    category: portal
+    engine: backstage
+spec:
+  description: prepares and exports software templates from the platform spec to the portal
+  builderRef:
+    kind: Builder
+    apiVersion: sdk.platformspec.io/v1alpha1
+    name: platformscript
+  buildSpec:
+    template: template.kts
+    subPath: templates/create-namespace
+    entrypoint: "prepareTemplate()"
