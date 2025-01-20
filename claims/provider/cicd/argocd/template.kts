@@ -4,13 +4,30 @@ import io.verticle.oss.platformapi.kinds.provider.api.cicd.Environment
 import io.verticle.oss.platformapi.kinds.provider.spi.*
 import io.verticle.oss.platformscript.api.*
 import io.platformspec.crd.provider.Spec
-import io.verticle.oss.platformapi.kinds.provider.api.Context
+import io.verticle.oss.platformapi.serviceprovider.Context
+import io.cloudevents.core.v1.*
+import io.verticle.oss.platformsdk.core.events.*
+import java.net.URI
+import java.util.UUID
 
 val prj = "acme"
 
 fun bootstrapProjectWorkflow(){
 
     log.info("starting script")
+
+    Platform.emitEvent(CloudEventBuilder()
+        .withType("Normal")
+        .withId(UUID.randomUUID().toString())
+        .withSource(URI.create("https://platformspec.io"))
+        .withSubject(Resource.getMetadata().getName())
+        .withData(EventData.builder()
+            .msg("bootstrapProjectWorkflow() ")
+            .action("reconcile")
+            .reason("processing")
+            .hasMetadata(Resource)
+            .build())
+        .build(), false)
 
     val credentials = CredentialApi.getCredential("aws-creds")
     val secrets     = ProviderApi.get(Categories.secrets, "hashivault") as? SecretsProvider
@@ -35,12 +52,12 @@ fun bootstrapProjectWorkflow(){
     }
 
     // create a new default project
-    cicd?.createEnvironment(providerSpec.get() as Spec , providerContext.get() as Context, 
+    cicd?.createEnvironment(Resource?.getSpec() as Spec , Context as Context,
         Environment.builder()
-        .name(prj)
-        .description("the ACME project")
-        .namespace("default")
-        .build())
+            .name(prj)
+            .description("the ACME project")
+            .namespace("default")
+            .build())
 
 }
 
