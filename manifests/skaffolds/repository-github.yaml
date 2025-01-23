@@ -1,16 +1,14 @@
 apiVersion: sdk.platformspec.io/v1alpha1
 kind: Scaffold
 metadata:
-  name: azure-entraid
+  name: argocd
   labels:
-    category: iaas
-    engine: azure
-    sso: entraid
-
+    category: repository
+    engine: github
 spec:
-  description: create necessary groups in Azure EntraID
+  description: manages a repository on Github
   builderRef:
     kind: Builder
     apiVersion: sdk.platformspec.io/v1alpha1
-    name: azure
+    name: githubrepository
   buildSpec: {}
