@@ -18,7 +18,7 @@ fun prepareTemplate(){
     log.info("rendering template ...")
     val renderedTemplate = TemplateApi.renderTemplateAsString(
         mapOf("clusters" to clusters),
-        Paths.get("claims", "portal", "backstage", "templates", "create-namespace"),
+        Paths.get("manifests", "portal", "backstage", "templates", "create-namespace"),
         Context,
         "template.yaml.jte")
     
