@@ -100,7 +100,7 @@ spec:
       input:
         url: ./content
         values:
-          name: ${{ parameters.name }}
+          name: ${"$"}{{ parameters.name }}
 
     - id: fetch-docs
       name: Fetch Docs
@@ -114,14 +114,14 @@ spec:
       action: publish:github
       input:
         allowedHosts: ['github.com']
-        description: This is ${{ parameters.name }}
-        repoUrl: ${{ parameters.repoUrl }}
+        description: This is ${"$"}{{ parameters.name }}
+        repoUrl: ${"$"}{{ parameters.repoUrl }}
 
     - id: register
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        repoContentsUrl: ${"$"}{{ steps['publish'].output.repoContentsUrl }}
         #repoContentsUrl: 'https://github.com/jenssaade/backstagetest'
 
         catalogInfoPath: '/catalog-info.yaml'

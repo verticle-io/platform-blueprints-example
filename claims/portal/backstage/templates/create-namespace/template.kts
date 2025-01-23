@@ -4,8 +4,8 @@ import io.verticle.oss.platformapi.kinds.provider.api.cicd.Environment
 import io.verticle.oss.platformapi.kinds.provider.spi.*
 import io.verticle.oss.platformscript.api.*
 import io.platformspec.crd.provider.Spec
-import io.verticle.oss.platformapi.kinds.provider.api.Context
-import java.nio.file.Path
+import io.verticle.oss.platformapi.serviceprovider.Context
+import java.nio.file.Paths
 
 fun prepareTemplate(){
 
@@ -13,14 +13,15 @@ fun prepareTemplate(){
 
     val clusters = ClusterApi.getClusters()
 
-    assert(TemplateApi != null)
     log.info("[X] TemplateApi available")
 
+    log.info("rendering template ...")
     val renderedTemplate = TemplateApi.renderTemplateAsString(
-            mapOf("clusters" to clusters),
-            Path.of("portal", "backstage", "templates", "create-namespace")
-            "template.yaml.kte", )
-
+        mapOf("clusters" to clusters),
+        Paths.get("claims", "portal", "backstage", "templates", "create-namespace"),
+        Context,
+        "template.yaml.jte")
+    
     println(renderedTemplate)
 
 }
