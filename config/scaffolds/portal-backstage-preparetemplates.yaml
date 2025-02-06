@@ -8,7 +8,7 @@ metadata:
     action: templates
 spec:
   description: prepares and exports software templates from the platform spec to the portal
-  builderRef:
+  bindingRef:
     kind: ServiceProviderBinding
     apiVersion: sdk.platformspec.io/v1alpha1
     name: platformscript
