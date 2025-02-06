@@ -23,10 +23,10 @@ fun executeAction(){
     // map to Port fields
     val namespace = Resource.getSpec().getConfig().get("namespace").asText()
 
-    log.info("[create-repository-github] rendering template with namespace name $namespace")
+    log.info("[create-namespace] rendering template with namespace name $namespace")
 
     val renderedTemplate: String = TemplateApi.renderTemplateAsString(
-        mapOf("repositoryName" to repositoryName),
+        mapOf("namespace" to namespace),
         templateDirPath,
         Context,
         "namespace.yaml.jte")

@@ -10,7 +10,7 @@ metadata:
 spec:
   description: create necessary groups in Azure EntraID
   builderRef:
-    kind: Builder
+    kind: ServiceProviderBinding
     apiVersion: sdk.platformspec.io/v1alpha1
     name: azure
   buildSpec: {}

@@ -9,10 +9,10 @@ metadata:
 spec:
   description: creates a namespace natively on cluster
   builderRef:
-    kind: Builder
+    kind: ServiceProviderBinding
     apiVersion: sdk.platformspec.io/v1alpha1
     name: platformscript
   buildSpec:
     template: template.kts
-    subPath: actions/create-namespace
+    subPath: manifests/portal/port/actions/create-namespace
     entrypoint: "executeAction()"

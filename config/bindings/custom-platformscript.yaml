@@ -1,5 +1,5 @@
 apiVersion: sdk.platformspec.io/v1alpha1
-kind: Builder
+kind: ServiceProviderBinding
 metadata:
   name: platformscript
 spec:

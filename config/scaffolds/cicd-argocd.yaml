@@ -8,9 +8,9 @@ metadata:
 spec:
   description: creates an argocd instance with SSO to Azure EntraID
   builderRef:
-    kind: Builder
+    kind: ServiceProviderBinding
     apiVersion: sdk.platformspec.io/v1alpha1
     name: platformscript
   buildSpec:
-    template: template.kts
+    template: manifests/cicd/argocd/template.kts
     entrypoint: "bootstrapProjectWorkflow()"

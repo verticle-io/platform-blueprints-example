@@ -9,10 +9,10 @@ metadata:
 spec:
   description: creates a new repository via a new RepositoryProviderResource
   builderRef:
-    kind: Builder
+    kind: ServiceProviderBinding
     apiVersion: sdk.platformspec.io/v1alpha1
     name: platformscript
   buildSpec:
     template: template.kts
-    subPath: actions/create-repository-github
+    subPath: manifests/portal/port/actions/create-repository-github
     entrypoint: "executeAction()"

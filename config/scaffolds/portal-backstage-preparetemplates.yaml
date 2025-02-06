@@ -5,13 +5,14 @@ metadata:
   labels:
     category: portal
     engine: backstage
+    action: templates
 spec:
   description: prepares and exports software templates from the platform spec to the portal
   builderRef:
-    kind: Builder
+    kind: ServiceProviderBinding
     apiVersion: sdk.platformspec.io/v1alpha1
     name: platformscript
   buildSpec:
     template: template.kts
-    subPath: templates/create-namespace
+    subPath: manifests/portal/backstage/templates/create-namespace
     entrypoint: "prepareTemplate()"
