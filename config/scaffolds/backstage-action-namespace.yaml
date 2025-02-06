@@ -1,0 +1,18 @@
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: Scaffold
+metadata:
+  name: backstage-action-create-namespace
+  labels:
+    category: portal
+    engine: backstage
+    action: create-namespace
+spec:
+  description: creates a namespace natively on cluster
+  builderRef:
+    kind: Builder
+    apiVersion: sdk.platformspec.io/v1alpha1
+    name: platformscript
+  buildSpec:
+    template: template.kts
+    subPath: actions/create-namespace
+    entrypoint: "executeAction()"

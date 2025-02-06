@@ -1,0 +1,22 @@
+---
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: PortalActionResource
+metadata:
+  name: backstage-create-repository-github
+  namespace: platformspec
+spec:
+  actionName: create-repository-github
+  description: Creates a Github repository
+  labelSelector: category=portal,engine=backstage,action=create-repository-github
+  portalRef:
+    apiVersion: core.platformspec.io/v1alpha1
+    kind: Portal
+    name: backstage
+    namespace: platformspec
+  config:
+    name: ${{values.argo_project}}
+    description: ${{values.name}}
+    namespace: ${{values.namespace}}
+    region: ${{values.region}}
+    customer: ${{values.customer}}
+

@@ -1,0 +1,18 @@
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: Scaffold
+metadata:
+  name: port-action-create-repository-github
+  labels:
+    category: portal
+    engine: port
+    action: create-repository-github
+spec:
+  description: creates a new repository via a new RepositoryProviderResource
+  builderRef:
+    kind: Builder
+    apiVersion: sdk.platformspec.io/v1alpha1
+    name: platformscript
+  buildSpec:
+    template: template.kts
+    subPath: actions/create-repository-github
+    entrypoint: "executeAction()"
