@@ -7,6 +7,11 @@ metadata:
     engine: backstage
     action: create-namespace
 spec:
+  implementing:
+    singular: portalactionresource
+    plural: portalactionresources
+    group: sdk.platformspec.io
+    version: v1alpha1
   description: creates a namespace natively on cluster
   bindingRef:
     kind: ServiceProviderBinding

@@ -6,6 +6,11 @@ metadata:
     category: cicd
     engine: argocd
 spec:
+  implementing:
+    singular: provider
+    plural: providers
+    group: core.platformspec.io
+    version: v1alpha1
   description: creates an argocd instance with SSO to Azure EntraID
   bindingRef:
     kind: ServiceProviderBinding
