@@ -1,0 +1,19 @@
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: Scaffold
+metadata:
+  name: crossplane
+  labels:
+    category: automation
+    engine: crossplane
+spec:
+  implementing:
+    singular: provider
+    plural: providers
+    group: core.platformspec.io
+    version: v1alpha1
+  description: establishes crossplane as an automation provider on the platform cluster
+  bindingRef:
+    kind: ServiceProviderBinding
+    apiVersion: sdk.platformspec.io/v1alpha1
+    name: crossplane-azure
+  buildSpec: {}

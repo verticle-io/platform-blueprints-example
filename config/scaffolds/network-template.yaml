@@ -1,0 +1,22 @@
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: Scaffold
+metadata:
+  name: network-template
+  labels:
+    category: network
+    cloud: azure
+    engine: crossplane
+spec:
+  implementing:
+    singular: network
+    plural: networks
+    group: core.platformspec.io
+    version: v1alpha1
+  description: create networks on azure via crossplane
+  bindingRef:
+    kind: ServiceProviderBinding
+    apiVersion: sdk.platformspec.io/v1alpha1
+    name: custom-template-kubernetes
+  buildSpec:
+    templatesPath: manifests/network
+

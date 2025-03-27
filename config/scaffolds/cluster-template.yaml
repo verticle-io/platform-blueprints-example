@@ -1,0 +1,22 @@
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: Scaffold
+metadata:
+  name: cluster-template
+  labels:
+    category: cluster
+    cloud: azure
+    engine: crossplane
+spec:
+  implementing:
+    singular: cluster
+    plural: clusters
+    group: core.platformspec.io
+    version: v1alpha1
+  description: create an aks cluster on azure via crossplane
+  bindingRef:
+    kind: ServiceProviderBinding
+    apiVersion: sdk.platformspec.io/v1alpha1
+    name: custom-template-kubernetes
+  buildSpec:
+    templatesPath: manifests/cluster
+

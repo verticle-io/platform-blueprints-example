@@ -1,0 +1,8 @@
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: ServiceProviderBinding
+metadata:
+  name: automation-crossplane
+spec:
+  implementation: io.verticle.oss.platformsdk.provider.automation.impl.CrossplaneProvider
+  spi: io.verticle.oss.platformapi.kinds.provider.spi.AutomationProvider
+  configPath: config/adapters/crossplane

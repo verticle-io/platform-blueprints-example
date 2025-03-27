@@ -1,0 +1,7 @@
+apiVersion: sdk.platformspec.io/v1alpha1
+kind: ServiceProviderBinding
+metadata:
+  name: custom-template-kubernetes
+spec:
+    implementation: io.verticle.oss.platformsdk.provider.custom.impl.KubernetesTemplateProvider
+    spi: io.verticle.oss.platformapi.kinds.provider.spi.CustomProvider

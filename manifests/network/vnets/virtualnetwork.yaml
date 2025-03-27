@@ -1,10 +1,13 @@
+@import com.fasterxml.jackson.databind.JsonNode
+@param JsonNode model
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
-  name: crossplane-quickstart-network
+  name: ${model.get("metadata").get("name").asText()}
+  namespace: platform
 spec:
   forProvider:
     addressSpace:
-      - 10.0.0.0/16
-    location: "Sweden Central"
-    resourceGroupName: docs
+      - ${model.get("spec").get("config").get("addressSpace").get(0).asText()}
+    location: "West Europe"
+    resourceGroupName: platform

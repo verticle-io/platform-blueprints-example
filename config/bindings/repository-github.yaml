@@ -4,4 +4,4 @@ metadata:
   name: githubrepository
 spec:
   implementation: io.verticle.oss.platformsdk.provider.repository.impl.GithubProvider
-  spi: io.verticle.oss.platformapi.kinds.provider.spi.RepositoryProvider^
+  spi: io.verticle.oss.platformapi.kinds.provider.spi.RepositoryProvider
