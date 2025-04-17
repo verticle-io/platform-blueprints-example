@@ -13,6 +13,7 @@ import java.nio.file.Files
 import io.verticle.oss.platformsdk.core.support.git.model.GitRepository
 import io.verticle.oss.platformapi.kinds.provider.crd.repository.RepositoryProviderResource
 import io.platformspec.crd.portal.Portal
+import io.verticle.oss.platformapi.kinds.provider.crd.portal.template.PortalTemplateResource
 
 fun prepareTemplate(){
 
@@ -31,30 +32,44 @@ fun prepareTemplate(){
         mapOf("clusters" to clusters),
         templateDirPath,
         Context,
-        "template.yaml.jte")
+        "template.yaml.jte")    
 
     println(renderedTemplate)
 
-    val res:RepositoryProviderResource = Context.findReference(Resource.spec.repositoryProviderRef) as RepositoryProviderResource
-    log.info("res $res")
 
-    val gitRepo = PlatformGitApi.gitGetRepositoryFor(res, Context)
+    // resolve resource
+    //var resource = PlatformResourceAPI.resolve(renderedTemplate, "platformspec")
+    val portalTemplateResource =  Resource as PortalTemplateResource
+
+    portalTemplateResource.getSpec().setTemplate(renderedTemplate)
+    //portalTemplateResource.getSpec().setTemplate("test")
+    //${{
+
+    // apply resource
+    PlatformResourceAPI.apply(portalTemplateResource, "platformspec")
+
+
+    // OPTIONALLY STORE IN GIT REPO
+    //val res:RepositoryProviderResource = Context.findReference(Resource.spec.repositoryProviderRef) as RepositoryProviderResource
+    //log.info("res $res")
+
+    //val gitRepo = PlatformGitApi.gitGetRepositoryFor(res, Context)
 
     // create template file
-    val localReposPath: Path = PlatformGitApi.getLocalRepositoryPath(gitRepo)
+    //val localReposPath: Path = PlatformGitApi.getLocalRepositoryPath(gitRepo)
 
-    PlatformFileApi.cloneDirectoryFromBlueprint(templateDirPath.resolve("content"), gitRepo, Paths.get("content"))
-    PlatformGitApi.gitAddDirectory(Paths.get("content"), gitRepo)
+    //PlatformFileApi.cloneDirectoryFromBlueprint(templateDirPath.resolve("content"), gitRepo, Paths.get("content"))
+    //PlatformGitApi.gitAddDirectory(Paths.get("content"), gitRepo)
 
     // add files
-    val filePath: Path = localReposPath.resolve("catalog-info.yaml")
+    //val filePath: Path = localReposPath.resolve("catalog-info.yaml")
 
-    log.info("adding template file to repo $filePath")
-    Files.write(filePath, renderedTemplate.toByteArray())
+    //log.info("adding template file to repo $filePath")
+    //Files.write(filePath, renderedTemplate.toByteArray())
 
-    PlatformGitApi.gitAddFile("catalog-info.yaml", renderedTemplate, gitRepo)
+    //PlatformGitApi.gitAddFile("catalog-info.yaml", renderedTemplate, gitRepo)
 
     // commit them
-    PlatformGitApi.gitCommit("update", gitRepo)
+    //PlatformGitApi.gitCommit("update", gitRepo)
 
 }

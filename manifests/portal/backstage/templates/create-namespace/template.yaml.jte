@@ -4,7 +4,7 @@ kind: Template
 metadata:
   name: platformspec-create-namespace
   title: PlatformSpec Create Namespace
-  description: creates a new cluster namespace via the PlatformControlPlane
+  description: creates a new cluster namespace via the PlatformControlPlane (v2)
 spec:
   owner: backstage/techdocs-core
   type: service
@@ -44,7 +44,7 @@ spec:
               backstage-taskid: ${"$"}{{context.task.id}}
           spec:
             actionName: create-namespace
-            description: Creates a new namespace
+            description: Creates a new namespace (v2)
             labelSelector: category=portal,engine=kubernetes,action=create-namespace
             portalRef:
               apiVersion: core.platformspec.io/v1alpha1
